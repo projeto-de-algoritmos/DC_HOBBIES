@@ -1,6 +1,25 @@
 package dchobbies
 
-func mergeAndCountInversions(leftS, rightS []int) ([]int, int) {
+type Hobbies struct {
+	int64
+}
+
+/* func ReadJson(fileName string, filter Hobbies) {
+	file, _ := os.Open(fileName)
+	defer file.Close()
+
+	err := json.Unmarshal(file, &Hobbies)
+
+    if err != nil {
+
+        // if error is not nil
+        // print error
+        fmt.Println(err)
+    }
+
+} */
+
+func MergeAndCountInversions(leftS, rightS []int) ([]int, int) {
 	var mergedS []int
 	mergedInv := 0
 	leftI, rightI := 0, 0
@@ -28,7 +47,7 @@ func mergeAndCountInversions(leftS, rightS []int) ([]int, int) {
 	return mergedS, mergedInv
 }
 
-func splitSlice(s []int) (s1, s2 []int) {
+func SplitSlice(s []int) (s1, s2 []int) {
 	if len(s)%2 == 0 {
 		s1 = s[:len(s)/2]
 		s2 = s[len(s)/2:]
@@ -39,15 +58,15 @@ func splitSlice(s []int) (s1, s2 []int) {
 	return
 }
 
-func sortAndCountInversions(s []int, inv int) ([]int, int) {
+func SortAndCountInversions(s []int, inv int) ([]int, int) {
 	if len(s) == 1 {
 		return s, inv
 	} else {
-		s1, s2 := splitSlice(s)
+		s1, s2 := SplitSlice(s)
 
-		leftS, leftInv := sortAndCountInversions(s1, inv)
-		rightS, rightInv := sortAndCountInversions(s2, inv)
-		mergedS, mergedInv := mergeAndCountInversions(leftS, rightS)
+		leftS, leftInv := SortAndCountInversions(s1, inv)
+		rightS, rightInv := SortAndCountInversions(s2, inv)
+		mergedS, mergedInv := MergeAndCountInversions(leftS, rightS)
 
 		totalInv := leftInv + rightInv + mergedInv
 
@@ -56,6 +75,6 @@ func sortAndCountInversions(s []int, inv int) ([]int, int) {
 }
 
 func CountSliceInversions(s []int) ([]int, int) {
-	totalSlice, totalInv := sortAndCountInversions(s, 0)
+	totalSlice, totalInv := SortAndCountInversions(s, 0)
 	return totalSlice, totalInv
 }
