@@ -1,24 +1,5 @@
 package dchobbies
 
-type Hobbies struct {
-	int64
-}
-
-/* func ReadJson(fileName string, filter Hobbies) {
-	file, _ := os.Open(fileName)
-	defer file.Close()
-
-	err := json.Unmarshal(file, &Hobbies)
-
-    if err != nil {
-
-        // if error is not nil
-        // print error
-        fmt.Println(err)
-    }
-
-} */
-
 func MergeAndCountInversions(leftS, rightS []int) ([]int, int) {
 	var mergedS []int
 	mergedInv := 0
